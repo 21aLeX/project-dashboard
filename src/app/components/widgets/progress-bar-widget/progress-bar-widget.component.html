@@ -1,0 +1,24 @@
+<div class="widget progress-widget">
+      <h3>Прогресс проектов</h3>
+      <div class="projects-list">
+        @for (project of projects(); track project.id) {
+          <div class="project-item">
+          <div class="project-header">
+            <span class="project-name">{{ project.name }}</span>
+            <span class="project-progress">{{ project.progress | number:'1.0-0' }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div 
+              class="progress-fill" 
+              [style.width.%]="project.progress"
+              [class.completed]="project.progress === 100"
+              [class.delayed]="project.progress < 50 && isProjectDelayed(project)">
+            </div>
+          </div>
+          <div class="project-stats">
+            {{ project.tasksCompleted }}/{{ project.tasksTotal }} задач
+          </div>
+        </div>
+      }
+      </div>
+    </div>
