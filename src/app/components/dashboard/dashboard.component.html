@@ -1,0 +1,97 @@
+<div class="dashboard">
+  <!-- Header -->
+  <header class="dashboard-header">
+    <h1>Дашборд проектов</h1>
+    <div class="controls">
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="Поиск проектов..."
+          [value]="filters().searchQuery"
+          (input)="onSearchChange($any($event.target).value)"
+          class="search-input"
+        >
+      </div>
+      
+      <select 
+        [value]="filters().statusFilter"
+        (change)="onStatusChange($any($event.target).value)"
+        class="status-filter"
+      >
+      @for (filter of statusFilters; track filter.value) {
+        <option [value]="filter.value">
+          {{ filter.label }}
+        </option>
+      }
+      </select>
+
+      <div class="widget-actions">
+        @for (widgetType of widgetTypes; track widgetType.type) {
+          <button
+          (click)="addWidget(widgetType.type)"
+          class="add-widget-btn"
+        >
+          {{ widgetType.icon }} {{ widgetType.name }}
+        </button>
+      }
+      </div>
+    </div>
+  </header>
+
+  <!-- Loading State -->
+   @if(isLoading()){
+    <div *ngIf="isLoading()" class="loading-state">
+    <div class="spinner"></div>
+    <p>Загрузка данных...</p>
+  </div>  
+}
+
+  <!-- Widgets -->
+   @if (!isLoading()){
+    <div 
+    cdkDropList
+    (cdkDropListDropped)="onWidgetDrop($event)"
+    class="widgets-grid"
+  >
+  @for (widget of widgets(); track widget.id) {
+    <div
+      cdkDrag
+      class="widget-container"
+    >
+      <div class="widget-header">
+        <span class="widget-title">{{ getWidgetTitle(widget.type) }}</span>
+        <button 
+          (click)="removeWidget(widget.id)"
+          class="remove-widget-btn"
+          title="Удалить виджет"
+        >
+          ×
+        </button>
+      </div>
+      
+      <div class="widget-content">
+        @switch (widget.type) {
+          @case ('progress-bar') {
+            <app-progress-bar-widget />
+          }
+          @case ('task-stats') {
+            <app-task-stats-widget />
+          }
+          @case ('timeline') {
+            <app-timeline-widget />
+          }
+        }
+      </div>
+    </div>
+  }
+  </div>
+}
+
+  <!-- Empty State -->
+   @if (widgets().length === 0 && !isLoading()) {
+    <div class="empty-state">
+      <h2>Нет виджетов</h2>
+      <p>Добавьте виджеты, чтобы начать работу с дашбордом</p>
+    </div>
+  }
+</div>
