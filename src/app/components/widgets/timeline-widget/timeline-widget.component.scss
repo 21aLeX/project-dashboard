@@ -1,0 +1,57 @@
+.timeline-widget {
+  .timeline {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-color);
+    }
+  }
+  
+  .timeline-item {
+    display: flex;
+    margin-bottom: 20px;
+    position: relative;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .timeline-marker {
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-top: 5px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .timeline-content {
+    flex: 1;
+  }
+  
+  .project-name {
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .project-dates {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 3px;
+  }
+  
+  .project-duration {
+    font-size: 12px;
+    color: #999;
+  }
+}

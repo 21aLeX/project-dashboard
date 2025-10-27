@@ -1,0 +1,19 @@
+<div class="widget timeline-widget">
+      <h3>Таймлайн проектов</h3>
+      <div class="timeline">
+        @for (project of recentProjects(); track project.id) {
+          <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="project-name">{{ project.name }}</div>
+            <div class="project-dates">
+              {{ project.startDate | date:'dd.MM.yyyy' }} - {{ project.endDate | date:'dd.MM.yyyy' }}
+            </div>
+            <div class="project-duration">
+              Длительность: {{ calculateDuration(project.startDate, project.endDate) }} дней
+            </div>
+          </div>
+        </div>
+      }
+      </div>
+    </div>
