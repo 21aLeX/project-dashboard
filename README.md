@@ -1,59 +1,57 @@
-# ProjectDashboard
+# Дашборд
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.7.
+Дашборд для управления проектами с возможностью отображения виджетов (прогресс, статистика, таймлайн), их перетаскивания, сохранения состояния и автоматического обновления данных.
 
-## Development server
+[**Demo**](https://project-dashboard-murex.vercel.app/)
 
-To start a local development server, run:
+## Установка
 
-```bash
-ng serve
-```
+Склонируйте репозиторий и в папке проекта выполните команду
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### `npm install`
 
-## Code scaffolding
+## Запуск проекта локально
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### `ng serve`
 
-```bash
-ng generate component component-name
-```
+Откройте [**http://127.0.0.1:4200**](http://127.0.0.1:4200) в своем браузере.
+Все изменения проекта будут происходить сразу.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Архитектура
+- Standalone Components: Все компоненты самостоятельные, без NgModules.
 
-```bash
-ng generate --help
-```
+- Signal-based State Management: Используются Angular Signals для реактивного управления состоянием.
 
-## Building
+- OnPush Change Detection: Для оптимизации производительности.
 
-To build the project run:
+- RxJS: Для асинхронных операций и реактивного программирования.
 
-```bash
-ng build
-```
+- Angular CDK Drag & Drop: Для перетаскивания виджетов.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Service Layer: Для работы с данными и бизнес-логикой.
 
-## Running unit tests
+1. DashboardComponent: Корневой компонент, управляет виджетами и фильтрами.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+2. Widgets:
 
-```bash
-ng test
-```
+    2.1 ProgressBarWidget: Отображает прогресс по проектам.
 
-## Running end-to-end tests
+    2.2 TaskStatsWidget: Показывает статистику задач с автообновлением.
 
-For end-to-end (e2e) testing, run:
+    2.3 TimelineWidget: Отображает таймлайн проектов.
 
-```bash
-ng e2e
-```
+3. DashboardStore: Централизованное хранилище состояния приложения.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+4. ProjectService: Сервис для работы с данными проектов (имитация HTTP-запросов).
 
-## Additional Resources
+5. StorageService: Сервис для сохранения состояния в localStorage.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Принятые решения
+- Управление состоянием (DashboardStore), кастомный Store на Signals
+(Простота использования, Отличная производительность, Легкая интеграция с компонентами)
+- Drag & Drop система, Angular CDK с сохранением позиций
+
+## AI
+- Помощь с Real-time обновление данных, RxJS + автоматическое обновление
+- Рефакторинг кода и помощь с подбором стилей
+- Помощь с DashboardStore и организации виджетов в целом
