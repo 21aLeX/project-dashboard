@@ -1,0 +1,48 @@
+<div class="widget stats-widget">
+      <div class="widget-header">
+        <h3>Статистика задач</h3>
+        <div class="auto-update-indicator" [class.updating]="isUpdating()">
+          <span class="indicator-dot"></span>
+          {{ isUpdating() ? 'Обновление...' : 'Автообновление' }}
+        </div>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value">{{ stats().totalProjects }}</div>
+          <div class="stat-label">Всего проектов</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">{{ stats().totalTasks }}</div>
+          <div class="stat-label">Всего задач</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">{{ stats().completedTasks }}</div>
+          <div class="stat-label">Выполнено</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">{{ stats().completionRate }}%</div>
+          <div class="stat-label">Процент выполнения</div>
+        </div>
+      </div>
+
+      <div class="projects-stats">
+        <div class="project-stat">
+          <span class="stat-badge active">{{ stats().activeProjects }}</span>
+          <span>Активные</span>
+        </div>
+        <div class="project-stat">
+          <span class="stat-badge completed">{{ stats().completedProjects }}</span>
+          <span>Завершённые</span>
+        </div>
+        <div class="project-stat">
+          <span class="stat-badge on-hold">{{ stats().onHoldProjects }}</span>
+          <span>На паузе</span>
+        </div>
+      </div>
+
+      <div class="last-updated">
+        <div>Последнее обновление: {{ lastUpdate() | date:'HH:mm:ss' }}</div>
+        <div class="next-update">Следующее: {{ nextUpdate() | date:'HH:mm:ss' }}</div>
+      </div>
+    </div>
